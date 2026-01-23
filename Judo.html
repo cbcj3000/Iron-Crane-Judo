@@ -164,10 +164,44 @@
             cursor: pointer;
             transition: transform 0.3s ease;
             filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+            animation: gentlePulse 2s ease-in-out infinite;
         }
 
         .crane-icon:hover {
             transform: scale(1.1);
+            animation: none;
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .click-instruction {
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            animation: fadeInOut 2s ease-in-out infinite;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
         }
 
         .hover-3d {
@@ -212,10 +246,26 @@
             text-align: center;
             font-size: 2rem;
             font-weight: 600;
-            color: #333;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
+            color: #1e3a8a;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
             line-height: 1.8;
+        }
+
+        .map-container {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            margin: 0.5rem auto 2rem auto;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         .schedule-section {
@@ -342,7 +392,8 @@
             background: rgba(0, 0, 0, 0.95);
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
+            padding-top: 5vh;
             z-index: 100;
             opacity: 0;
             pointer-events: none;
@@ -356,8 +407,11 @@
 
         .gallery-modal-content {
             position: relative;
-            max-width: 85%;
-            max-height: 85%;
+            max-width: 90%;
+            max-height: 85vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             transform: scale(0.8);
             transition: transform 0.3s;
         }
@@ -367,8 +421,9 @@
         }
 
         .gallery-modal-content img {
-            width: 100%;
-            height: 100%;
+            height: 70vh;
+            width: auto;
+            max-width: 100%;
             object-fit: contain;
             border-radius: 0.5rem;
         }
@@ -395,7 +450,7 @@
             color: #1e3a8a;
             text-align: center;
             max-width: 900px;
-            margin: 2rem auto 1.5rem auto;
+            margin: 0.5rem auto 1.5rem auto;
             line-height: 1.8;
             font-weight: 500;
         }
@@ -428,6 +483,15 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center 20%;
+        }
+
+        .sensei-card:nth-child(1) figure img {
+            object-position: center 50%;
+        }
+
+        .sensei-card:nth-child(2) figure img {
+            object-position: center 0%;
         }
 
         .sensei-card .card-body {
@@ -522,7 +586,7 @@
         .info-cards-section {
             width: 100%;
             max-width: 1200px;
-            padding: 4rem 2rem;
+            padding: 1rem 2rem 4rem 2rem;
         }
 
         .info-cards-grid {
@@ -583,7 +647,7 @@
         .contact-section {
             width: 100%;
             max-width: 1200px;
-            padding: 4rem 2rem;
+            padding: 1rem 2rem 4rem 2rem;
         }
 
         .contact-title {
@@ -674,13 +738,13 @@
 
         .alert {
             position: fixed;
-            top: 100px;
-            right: 2rem;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-150px);
             padding: 1rem 1.5rem;
             border-radius: 0.5rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             z-index: 1000;
-            transform: translateX(400px);
             transition: transform 0.3s;
             display: flex;
             align-items: center;
@@ -688,7 +752,7 @@
         }
 
         .alert.show {
-            transform: translateX(0);
+            transform: translateX(-50%) translateY(0);
         }
 
         .alert-success {
@@ -696,8 +760,11 @@
             color: white;
         }
 
-        .alert-icon {
-            font-size: 1.5rem;
+        .alert svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            flex-shrink: 0;
+            stroke: currentColor;
         }
 
         @media (max-width: 968px) {
@@ -708,7 +775,7 @@
 
         .instagram-section {
             width: 100%;
-            padding: 2rem 0 12rem 0;
+            padding: 2rem 0 4rem 0;
             overflow: hidden;
             background: #f9fafb;
         }
@@ -762,6 +829,12 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             background: #fff;
             transition: transform 0.3s;
+        }
+
+        .instagram-post iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         .instagram-post:hover {
@@ -828,6 +901,7 @@
     <header id="mainHeader">
         <div role="tablist" class="tabs">
             <a role="tab" class="tab tab-active" data-section="about">About</a>
+            <a role="tab" class="tab" data-section="address">Address</a>
             <a role="tab" class="tab" data-section="schedule">Schedule</a>
             <a role="tab" class="tab" data-section="gallery">Gallery</a>
             <a role="tab" class="tab" data-section="sensei">Sensei</a>
@@ -844,6 +918,7 @@
              class="crane-icon" 
              id="craneIcon"
              crossorigin="anonymous">
+        <div class="click-instruction">Click The Crane</div>
     </div>
 
     <div class="container" id="mainContent">
@@ -865,9 +940,21 @@
                 <div></div>
                 <div></div>
             </div>
-            
+        </section>
+        
+        <section class="content-section" id="address">
+            <h2 class="section-title">Address</h2>
             <div class="address">
                 1234 Jamaica Ave. Queens, NY, 11260
+            </div>
+            
+            <div class="map-container">
+                <iframe 
+                    src="https://maps.google.com/maps?q=1234+Jamaica+Ave,+Queens,+NY,+11260&output=embed"
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
         </section>
         
@@ -907,28 +994,28 @@
             <div class="gallery-section">
                 <div class="gallery-grid">
                     <div class="gallery-item" data-index="0">
-                        <img src="https://images.unsplash.com/photo-1555597673-b21d5c935865?w=800&h=800&fit=crop" alt="Judo Training">
+                        <img src="https://www.kcpinternational.com/wp-content/uploads/2011/09/50208542308_12222e860b_c.jpg?w=800&h=800&fit=crop" alt="Judo Training">
                     </div>
                     <div class="gallery-item" data-index="1">
-                        <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=800&h=800&fit=crop" alt="Judo Competition">
+                        <img src="https://www.panamsports.org/wp-content/uploads/2023/10/Imagen-de-WhatsApp-2023-10-28-a-las-16.02.08_9782b109-scaled.jpg?w=800&h=800&fit=crop" alt="Judo Competition">
                     </div>
                     <div class="gallery-item" data-index="2">
-                        <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=800&h=800&fit=crop" alt="Judo Technique">
+                        <img src="https://www.panamsports.org/wp-content/uploads/2023/10/Lima-2019-Judo-Womens-78-kg-Gold-Medal-CUB-ORTIZ-Idalys-vs-PUR-MOJICA-Melissa-B23I7192.jpg?w=800&h=800&fit=crop" alt="Judo Technique">
                     </div>
                     <div class="gallery-item" data-index="3">
-                        <img src="https://images.unsplash.com/photo-1583473848882-f9a5bc7fd2ee?w=800&h=800&fit=crop" alt="Martial Arts Training">
+                        <img src="https://www.kingz.com/cdn/shop/articles/Judo_Throw_Technique_in_Action_8663fef1-9c70-4e0d-a05d-8d0dcb3a8e34.png?v=1764692694?w=800&h=800&fit=crop" alt="Martial Arts Training">
                     </div>
                     <div class="gallery-item" data-index="4">
-                        <img src="https://images.unsplash.com/photo-1589487391730-58f20eb2c308?w=800&h=800&fit=crop" alt="Judo Practice">
+                        <img src="https://la28.org/content/dam/latwentyeight/olympic-sports/desktop/OLYJudoDesktop.jpg?w=800&h=800&fit=crop" alt="Judo Practice">
                     </div>
                     <div class="gallery-item" data-index="5">
-                        <img src="https://images.unsplash.com/photo-1555597408-26bc8e548a46?w=800&h=800&fit=crop" alt="Judo Dojo">
+                        <img src="https://www.eju.net/wp-content/uploads/2022/05/_BT__D5B3100-scaled.jpg?w=800&h=800&fit=crop" alt="Judo Dojo">
                     </div>
                     <div class="gallery-item" data-index="6">
-                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=800&fit=crop" alt="Martial Arts">
+                        <img src="https://www.paralympic.org/sites/default/files/styles/large_original/public/2021-06/Lucia-da-Silva-Teixeira-Araujo-Inna-Cherniak-judo-rio.jpg?itok=ns89YmXh?w=800&h=800&fit=crop" alt="Martial Arts">
                     </div>
                     <div class="gallery-item" data-index="7">
-                        <img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?w=800&h=800&fit=crop" alt="Combat Sports">
+                        <img src="https://web-japan.org/kidsweb/img/virtual_judo01_pic01.jpg?w=800&h=800&fit=crop" alt="Combat Sports">
                     </div>
                 </div>
             </div>
@@ -941,7 +1028,7 @@
             <div class="sensei-grid">
                 <div class="sensei-card">
                     <figure>
-                        <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=600&h=800&fit=crop" alt="Sensei Tanaka" />
+                        <img src="https://www.westcovinajudodojo.org/uploads/4/0/6/2/40629775/5020243_orig.jpg?w=600&h=800&fit=crop" alt="Sensei Tanaka" />
                     </figure>
                     <div class="card-body">
                         <h2 class="card-title">Sensei Tanaka</h2>
@@ -951,7 +1038,7 @@
                 
                 <div class="sensei-card">
                     <figure>
-                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=800&fit=crop" alt="Sensei Rodriguez" />
+                        <img src="https://images.squarespace-cdn.com/content/v1/5c9fbce8815512710c66479b/1555650572562-LV1D1IJHOZNSG6JJ7JJ6/Steve_Viera.jpg?w=600&h=800&fit=crop" alt="Sensei Rodriguez" />
                     </figure>
                     <div class="card-body">
                         <h2 class="card-title">Sensei Rodriguez</h2>
@@ -961,7 +1048,7 @@
                 
                 <div class="sensei-card">
                     <figure>
-                        <img src="https://images.unsplash.com/photo-1583473848882-f9a5bc7fd2ee?w=600&h=800&fit=crop" alt="Sensei Chen" />
+                        <img src="https://www.londrinahistorica.com.br/admin/assets/uploads/images/publications/files/bbf548605fc33800e80e222292cdacb2.jpg?w=600&h=800&fit=crop" alt="Sensei Chen" />
                     </figure>
                     <div class="card-body">
                         <h2 class="card-title">Sensei Chen</h2>
@@ -1001,7 +1088,7 @@
                 <div class="info-cards-grid">
                     <div class="info-card">
                         <div class="info-card-image">
-                            <img src="https://images.unsplash.com/photo-1555597408-26bc8e548a46?w=800&h=600&fit=crop" alt="Judo Training">
+                            <img src="https://www.paralympic.org/sites/default/files/styles/image_crop_16_9_800_450/public/2024-09/Yujiro%20Seto%2C%20Paris%202024%2C%20Para%20judo%2C%20Japan.jpg?h=4f0c95b9&itok=vBHB2uF-?w=800&h=600&fit=crop" alt="Judo Training">
                         </div>
                         <div class="info-card-content">
                             <h3 class="info-card-title" data-scramble="The Importance of Judo in Building Discipline, Character, and Respect">The Importance of Judo in Building Discipline, Character, and Respect</h3>
@@ -1011,7 +1098,7 @@
                     
                     <div class="info-card">
                         <div class="info-card-image">
-                            <img src="https://images.unsplash.com/photo-1589487391730-58f20eb2c308?w=800&h=600&fit=crop" alt="Judo Practice">
+                            <img src="https://cdn.evolve-mma.com/wp-content/uploads/2023/04/judo.jpg?w=800&h=600&fit=crop" alt="Judo Practice">
                         </div>
                         <div class="info-card-content">
                             <h3 class="info-card-title" data-scramble="The Benefits of Practicing Judo">The Benefits of Practicing Judo</h3>
@@ -1044,7 +1131,7 @@
                     
                     <div class="hover-3d" id="contactImage">
                         <figure>
-                            <img src="https://images.unsplash.com/photo-1555597673-b21d5c935865?w=800&h=1000&fit=crop" alt="Judo Training" />
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Jigoro_Kano_and_Kyuzo_Mifune_%28restoration%29.jpg?w=800&h=1000&fit=crop" alt="Judo Training" />
                         </figure>
                         <div></div>
                         <div></div>
@@ -1066,36 +1153,38 @@
         
         <div class="instagram-scroll-container" id="instagramContainer">
             <div class="instagram-wrapper" id="instagramWrapper">
+
                 <div class="instagram-post">
-                    <img class="instagram-post-image" src="https://images.unsplash.com/photo-1555597673-b21d5c935865?w=800&h=1000&fit=crop" alt="Judo Training">
+                    <iframe src="https://www.instagram.com/p/DIuUc0syp07/embed" width="400" height="500" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
                 </div>
                 <div class="instagram-post">
-                    <img class="instagram-post-image" src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=800&h=1000&fit=crop" alt="Judo Competition">
+                    <iframe src="https://www.instagram.com/p/DGgbw4bS7tq/embed" width="400" height="500" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                </div>
+                <!-- <div class="instagram-post">
+                    <iframe src="https://www.instagram.com/p/DGE7Ul0MTjW/embed" width="400" height="500" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                </div> -->
+                <div class="instagram-post">
+                    <iframe src="https://www.instagram.com/p/C0pDC1ULsQ1/embed" width="400" height="500" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
                 </div>
                 <div class="instagram-post">
-                    <img class="instagram-post-image" src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=800&h=1000&fit=crop" alt="Judo Technique">
+                    <iframe src="https://www.instagram.com/p/CxK6d7YrlWM/embed" width="400" height="500" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
                 </div>
                 <div class="instagram-post">
-                    <img class="instagram-post-image" src="https://images.unsplash.com/photo-1583473848882-f9a5bc7fd2ee?w=800&h=1000&fit=crop" alt="Martial Arts">
+                    <iframe src="https://www.instagram.com/p/CrT-yDmriil/embed" width="400" height="500" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
                 </div>
                 <div class="instagram-post">
-                    <img class="instagram-post-image" src="https://images.unsplash.com/photo-1589487391730-58f20eb2c308?w=800&h=1000&fit=crop" alt="Judo Practice">
-                </div>
-                <div class="instagram-post">
-                    <img class="instagram-post-image" src="https://images.unsplash.com/photo-1555597408-26bc8e548a46?w=800&h=1000&fit=crop" alt="Dojo">
-                </div>
-                <div class="instagram-post">
-                    <img class="instagram-post-image" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=1000&fit=crop" alt="Training Session">
-                </div>
-                <div class="instagram-post">
-                    <img class="instagram-post-image" src="https://images.unsplash.com/photo-1551958219-acbc608c6377?w=800&h=1000&fit=crop" alt="Judo Athletes">
+                    <iframe src="https://www.instagram.com/p/DPRvRzdEZnA/embed" width="400" height="500" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="alert alert-success" id="successAlert">
-        <span class="alert-icon">✓</span>
+    <script async src="//www.instagram.com/embed.js"></script>
+
+    <div role="alert" class="alert alert-success" id="successAlert">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
         <span>Message sent successfully!</span>
     </div>
 
@@ -1139,6 +1228,7 @@
         
         gsap.registerPlugin(TextPlugin, ScrambleTextPlugin, ScrollTrigger);
         
+        //Declarations
         let craneIcon = document.getElementById("craneIcon");
         let initialScreen = document.getElementById("initialScreen");
         let mainContent = document.getElementById("mainContent");
@@ -1161,7 +1251,6 @@
             }
         });
         
-        // Initialize points - start with overlay closed (at 0)
         for (let i = 0; i < numPaths; i++) {
             let points = [];
             allPoints.push(points);
@@ -1170,7 +1259,6 @@
             }
         }
         
-        // Initial render to hide overlay
         render();
         
         // Click crane icon to trigger the morphing effect
@@ -1191,12 +1279,10 @@
         function animateOpen() {
             tl.progress(0).clear();
             
-            // Randomize delays for each point
             for (let i = 0; i < numPoints; i++) {
                 pointsDelay[i] = Math.random() * delayPointsMax;
             }
-            
-            // Animate each path from 0 to 100 (covering screen)
+
             for (let i = 0; i < numPaths; i++) {
                 let points = allPoints[i];
                 let pathDelay = delayPerPath * i;
@@ -1211,20 +1297,14 @@
             
             // After animation completes, hide initial screen and show content
             tl.call(() => {
-                // Scroll to top
                 window.scrollTo(0, 0);
-                
                 initialScreen.classList.add("hidden");
                 mainContent.classList.add("visible");
-                
-                // Enable scrolling
                 document.body.classList.add("content-visible");
-                
                 // Show header
                 setTimeout(() => {
                     mainHeader.classList.add("visible");
                 }, 500);
-                
                 // Scramble text effect for titles
                 setTimeout(() => {
                     gsap.to("#title", {
@@ -1269,13 +1349,9 @@
         
         function animateReveal() {
             tl.progress(0).clear();
-            
-            // Randomize delays for each point
             for (let i = 0; i < numPoints; i++) {
                 pointsDelay[i] = Math.random() * delayPointsMax;
             }
-            
-            // Animate each path from 100 back to 0 (revealing content)
             for (let i = 0; i < numPaths; i++) {
                 let points = allPoints[i];
                 let pathDelay = delayPerPath * (numPaths - i - 1);
@@ -1348,43 +1424,49 @@
             }
         });
         
-        // Footer scroll animation
+        // Footer scroll, only appears at bottom of page
         gsap.to("#footer", {
             scrollTrigger: {
-                trigger: ".schedule-section",
-                start: "bottom bottom",
-                end: "bottom top",
-                scrub: true,
-                toggleActions: "play none none reverse"
+                trigger: "#follow",
+                start: "bottom bottom-=100",
+                end: "bottom bottom",
+                scrub: true
             },
             y: 0,
             ease: "none"
         });
         
-        // Tab Navigation - Smooth Scroll to Sections
+        // Tab Navigation, smooth Scroll to Sections
         const navTabs = document.querySelectorAll('.tab');
         
         navTabs.forEach(tab => {
             tab.addEventListener('click', (e) => {
                 e.preventDefault();
                 const sectionName = tab.getAttribute('data-section');
-                const section = document.getElementById(sectionName);
-                
-                // Remove active class from all tabs
                 navTabs.forEach(t => t.classList.remove('tab-active'));
-                // Add active class to clicked tab
                 tab.classList.add('tab-active');
                 
-                // Scroll to section
-                if (section) {
+                // For About tab, scroll to the top
+                if (sectionName === 'about') {
                     const headerHeight = mainHeader.offsetHeight;
-                    const sectionTop = section.offsetTop - headerHeight - 10;
-                    window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+                    const heroTitle = document.getElementById('heroTitle');
+                    if (heroTitle) {
+                        const heroTop = heroTitle.offsetTop - headerHeight - 10;
+                        window.scrollTo({ top: heroTop, behavior: 'smooth' });
+                    }
+                } else {
+                    // For other sections, scroll to the section
+                    const section = document.getElementById(sectionName);
+                    if (section) {
+                        const headerHeight = mainHeader.offsetHeight;
+                        const sectionTop = section.offsetTop - headerHeight - 10;
+                        window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+                    }
                 }
             });
         });
         
-        // Gallery Modal Functionality
+        // Gallery
         const galleryItems = document.querySelectorAll('.gallery-item');
         const galleryModal = document.getElementById('galleryModal');
         const modalImage = document.getElementById('modalImage');
@@ -1421,13 +1503,12 @@
             }
         });
         
-        // Info Cards Scramble Animation on Scroll
+        // Info Cards scramble animation on scroll
         const infoCardTitles = document.querySelectorAll('.info-card-title');
         const infoCardTexts = document.querySelectorAll('.info-card-text');
         
         infoCardTitles.forEach((title, index) => {
             const originalText = title.getAttribute('data-scramble');
-            title.textContent = '';
             
             gsap.to(title, {
                 scrollTrigger: {
@@ -1447,7 +1528,6 @@
         
         infoCardTexts.forEach((text, index) => {
             const originalText = text.getAttribute('data-scramble');
-            text.textContent = '';
             
             gsap.to(text, {
                 scrollTrigger: {
@@ -1480,6 +1560,7 @@
                 message: formData.get('message')
             };
             
+            //DOES NOT WORK RIGHT NOW BUT HOW TO IS BELOW
             // Replace with your actual email service endpoint
             // For now, simulating submission
             try {
@@ -1545,40 +1626,56 @@
             });
         }
         
-        // Instagram Feed Auto-Rotating Animation
+        // Instagram Feed 
         const instagramWrapper = document.getElementById('instagramWrapper');
         const instagramContainer = document.getElementById('instagramContainer');
         
+        console.log('Instagram wrapper:', instagramWrapper);
+        console.log('Instagram container:', instagramContainer);
+        
         if (instagramWrapper && instagramContainer) {
-            // Clone the posts to create seamless loop
-            const posts = Array.from(instagramWrapper.children);
-            posts.forEach(post => {
-                const clone = post.cloneNode(true);
-                instagramWrapper.appendChild(clone);
-            });
-            
-            const totalWidth = instagramWrapper.scrollWidth / 2;
-            
-            // Create continuous rotation animation
-            const rotateAnimation = gsap.to(instagramWrapper, {
-                x: -totalWidth,
-                duration: 30,
-                ease: "none",
-                repeat: -1,
-                modifiers: {
-                    x: gsap.utils.unitize(x => parseFloat(x) % totalWidth)
-                }
-            });
-            
-            // Pause on hover
-            instagramContainer.addEventListener('mouseenter', () => {
-                rotateAnimation.pause();
-            });
-            
-            // Resume on mouse leave
-            instagramContainer.addEventListener('mouseleave', () => {
-                rotateAnimation.play();
-            });
+            setTimeout(() => {
+                console.log('Starting Instagram animation setup');
+                
+                // Cloning posts, posts are not exactly how they are on instagram
+                const posts = Array.from(instagramWrapper.children);
+                console.log('Number of posts:', posts.length);
+                
+                posts.forEach(post => {
+                    const clone = post.cloneNode(true);
+                    instagramWrapper.appendChild(clone);
+                });
+                
+                console.log('Posts cloned, total now:', instagramWrapper.children.length);
+                
+                const totalWidth = instagramWrapper.scrollWidth / 2;
+                console.log('Total width for animation:', totalWidth);
+                
+                // Continuous rotation
+                const rotateAnimation = gsap.to(instagramWrapper, {
+                    x: -totalWidth,
+                    duration: 30,
+                    ease: "none",
+                    repeat: -1,
+                    modifiers: {
+                        x: gsap.utils.unitize(x => parseFloat(x) % totalWidth)
+                    }
+                });
+                
+                console.log('Animation started');
+                
+                // Pause on hover
+                instagramContainer.addEventListener('mouseenter', () => {
+                    console.log('Animation paused');
+                    rotateAnimation.pause();
+                });
+                
+                // Resume when not hovering
+                instagramContainer.addEventListener('mouseleave', () => {
+                    console.log('Animation resumed');
+                    rotateAnimation.play();
+                });
+            }, 2000);
         }
     </script>
 </body>
