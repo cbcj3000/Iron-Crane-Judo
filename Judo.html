@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="https://png.pngtree.com/png-clipart/20221123/ourmid/pngtree-bird-crane-white-crane-png-image_6171040.png">
+    <link rel="icon" type="image/png"
+        href="https://png.pngtree.com/png-clipart/20221123/ourmid/pngtree-bird-crane-white-crane-png-image_6171040.png">
     <title>Iron Crane Judo</title>
     <style>
         * {
@@ -44,17 +46,7 @@
             transform: translateY(0);
         }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: #fff;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            padding: 4rem 2rem 2rem 2rem;
-        }
+
 
         .container.visible {
             opacity: 1;
@@ -103,14 +95,41 @@
 
         .tabs {
             display: flex;
+            /* Default for Desktop: Centered */
             justify-content: center;
             gap: 0;
             margin: 0;
             border-bottom: none;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .tabs {
+                /* Mobile: Push to left to allow scrolling from the start */
+                justify-content: flex-start;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                /* Hides scrollbar on Firefox */
+                padding: 0 10px;
+                /* Gives a little breathing room on the edges */
+            }
+
+            .tabs::-webkit-scrollbar {
+                display: none;
+                /* Hides scrollbar on Chrome/Safari */
+            }
+
+            .tab {
+                flex: 0 0 auto;
+                /* Keeps tabs from squishing on mobile */
+            }
         }
 
         .tab {
-            padding: 0.6rem 1.2rem;
+            flex: 0 0 auto;
+            padding: 0.8rem 1.2rem;
             font-size: 0.85rem;
             font-weight: 600;
             text-decoration: none;
@@ -174,9 +193,12 @@
         }
 
         @keyframes gentlePulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
             }
+
             50% {
                 transform: scale(1.05);
             }
@@ -197,9 +219,12 @@
         }
 
         @keyframes fadeInOut {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 0.6;
             }
+
             50% {
                 opacity: 1;
             }
@@ -233,7 +258,7 @@
             display: block;
         }
 
-        .hover-3d > div {
+        .hover-3d>div {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -500,7 +525,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
             color: white;
             padding: 2rem;
         }
@@ -578,6 +603,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -881,23 +907,359 @@
             h1 {
                 font-size: 1.5rem;
             }
-            
+
             .subtitle {
                 font-size: 1rem;
             }
-            
+
             .crane-icon {
                 width: 200px;
                 height: 200px;
             }
-            
+
             .hover-3d {
                 width: 300px;
                 height: 375px;
             }
         }
+
+        /* 1. PREVENT THE SIDE-SCROLL WIGGLE */
+        body.content-visible {
+            overflow-x: hidden;
+            /* Hard stop for horizontal scrolling */
+            overflow-y: auto;
+            width: 100%;
+        }
+
+
+
+        /* 3. FIX SECTION & TITLE ALIGNMENT */
+        .content-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Centers titles and grids */
+            text-align: center;
+            padding: 2rem 0;
+            overflow: hidden;
+            /* Prevents children from pushing width */
+        }
+
+        /* 4. FIX SENSEI GRID */
+        .sensei-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            justify-content: center;
+            /* Centers the cards if they don't fill a row */
+        }
+
+        /* 5. MOBILE SPECIFIC OVERRIDES */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            h1 {
+                font-size: 1.4rem;
+            }
+
+            .hover-3d,
+            .sensei-card,
+            .info-card {
+                width: 100% !important;
+                /* Forces cards to stay within screen */
+                max-width: 350px;
+                margin: 0 auto;
+                /* Centers cards when stacked */
+            }
+
+            .sensei-grid {
+                grid-template-columns: 1fr;
+                /* Single column on mobile */
+                justify-items: center;
+            }
+
+            .testimonial-bubble {
+                max-width: 90%;
+                /* Stops bubbles from being too wide */
+            }
+        }
+
+        /* 1. PREVENT HORIZONTAL SCROLLING (THE WIGGLE) */
+        html,
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body.content-visible {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* 3. CENTER TITLES AND SECTIONS */
+        .content-section {
+            width: 100%;
+            max-width: 100vw;
+            /* Prevents pushing past screen width */
+            padding: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* This centers the title and content */
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .section-title,
+        .testimonials-title {
+            width: 100%;
+            text-align: center;
+            margin: 0 auto 2rem auto;
+            display: block;
+        }
+
+        /* 4. FIX SENSEI GRID ALIGNMENT */
+        .sensei-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1100px;
+            justify-content: center;
+            padding: 0 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* THE NUCLEAR OPTION: REMOVE ALL HORIZONTAL SCROLL */
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            /* This kills the side-to-side scroll */
+            position: relative;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #fff;
+            color: #333;
+        }
+
+        body.content-visible {
+            overflow-y: auto;
+            overflow-x: hidden;
+            /* Double-down on preventing side-scroll */
+        }
+
+        /* HEADER & TABS */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+            padding: 0.5rem 0;
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        header.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .container.visible {
+            opacity: 1;
+        }
+
+        /* SECTION & TITLE CENTERING */
+        .content-section {
+            width: 100%;
+            max-width: 100%;
+            padding: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Forces titles and content to the center */
+            text-align: center;
+        }
+
+        .section-title,
+        .testimonials-title,
+        .hero-title,
+        h1 {
+            width: 100%;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* SENSEI PHOTOS FIX */
+        .sensei-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            justify-items: center;
+            /* Centers the cards in the grid */
+            padding: 0 1rem;
+        }
+
+        .sensei-card {
+            width: 100%;
+            max-width: 350px;
+            /* Keeps photos from getting too huge */
+            border-radius: 1rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* PREVENT ELEMENTS FROM PUSHING WIDTH */
+        .hover-3d,
+        .map-container,
+        .info-card,
+        .schedule-section {
+            max-width: 100% !important;
+        }
+
+        /* MOBILE FIX FOR SIDE-SCROLLING ELEMENTS */
+        @media (max-width: 768px) {
+            .hover-3d {
+                width: 100% !important;
+                height: 350px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            /* Ensure the grid doesn't overflow on small screens */
+            .sensei-grid,
+            .info-cards-grid,
+            .schedule-grid {
+                grid-template-columns: 1fr;
+                width: 100%;
+            }
+
+            .tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        /* Ensure the modal is the top-most layer */
+        .gallery-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            /* Higher than header */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Fix for the disappearing X button */
+        .gallery-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            /* Semi-transparent circle */
+            border: none;
+            color: white;
+            font-size: 2.5rem;
+            line-height: 1;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+            /* Ensure it stays above the image */
+            transition: background 0.3s;
+        }
+
+        .gallery-modal-close:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }
+
+        .gallery-modal-content img {
+            max-width: 90vw;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        html {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        body {
+            width: 100%;
+            max-width: 100vw;
+            margin: 0;
+            padding: 0;
+            /* This specific line prevents the "right shift" on desktop */
+            margin-right: calc(100vw - 100%);
+            font-family: 'Arial', sans-serif;
+            background: #fff;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
     </style>
+
 </head>
+
 <body>
     <header id="mainHeader">
         <div role="tablist" class="tabs">
@@ -914,11 +1276,8 @@
     </header>
 
     <div class="initial-screen" id="initialScreen">
-        <img src="https://png.pngtree.com/png-clipart/20221123/ourmid/pngtree-bird-crane-white-crane-png-image_6171040.png" 
-             alt="Crane Icon" 
-             class="crane-icon" 
-             id="craneIcon"
-             crossorigin="anonymous">
+        <img src="https://png.pngtree.com/png-clipart/20221123/ourmid/pngtree-bird-crane-white-crane-png-image_6171040.png"
+            alt="Crane Icon" class="crane-icon" id="craneIcon" crossorigin="anonymous">
         <div class="click-instruction">Click The Crane</div>
     </div>
 
@@ -926,11 +1285,12 @@
         <h2 class="hero-title" id="heroTitle">Iron Crane Judo</h2>
         <h1 id="title">Building Discipline, Character, Respect</h1>
         <p class="subtitle" id="subtitle">Experience the Power of Judo. Develop Strong Values and Achieve Success.</p>
-        
+
         <section class="content-section" id="about">
             <div class="hover-3d" id="card3d">
                 <figure>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/10/Portrait_of_late_Mr._Kano.jpg" alt="Jigoro Kano - Founder of Judo" />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/10/Portrait_of_late_Mr._Kano.jpg"
+                        alt="Jigoro Kano - Founder of Judo" />
                 </figure>
                 <div></div>
                 <div></div>
@@ -942,23 +1302,20 @@
                 <div></div>
             </div>
         </section>
-        
+
         <section class="content-section" id="address">
             <h2 class="section-title">Address</h2>
             <div class="address">
                 1234 Jamaica Ave. Queens, NY, 11260
             </div>
-            
+
             <div class="map-container">
-                <iframe 
-                    src="https://maps.google.com/maps?q=1234+Jamaica+Ave,+Queens,+NY,+11260&output=embed"
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
+                <iframe src="https://maps.google.com/maps?q=1234+Jamaica+Ave,+Queens,+NY,+11260&output=embed"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
         </section>
-        
+
         <section class="content-section" id="schedule">
             <div class="schedule-section">
                 <h2 class="section-title">Schedule</h2>
@@ -976,7 +1333,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="schedule-card">
                         <div class="card-body">
                             <h2 class="card-title">Saturday</h2>
@@ -989,127 +1346,161 @@
                 </div>
             </div>
         </section>
-        
+
         <section class="content-section" id="gallery">
             <h2 class="section-title">Gallery</h2>
             <div class="gallery-section">
                 <div class="gallery-grid">
                     <div class="gallery-item" data-index="0">
-                        <img src="https://www.kcpinternational.com/wp-content/uploads/2011/09/50208542308_12222e860b_c.jpg?w=800&h=800&fit=crop" alt="Judo Training">
+                        <img src="https://www.kcpinternational.com/wp-content/uploads/2011/09/50208542308_12222e860b_c.jpg?w=800&h=800&fit=crop"
+                            alt="Judo Training">
                     </div>
                     <div class="gallery-item" data-index="1">
-                        <img src="https://www.panamsports.org/wp-content/uploads/2023/10/Imagen-de-WhatsApp-2023-10-28-a-las-16.02.08_9782b109-scaled.jpg?w=800&h=800&fit=crop" alt="Judo Competition">
+                        <img src="https://www.panamsports.org/wp-content/uploads/2023/10/Imagen-de-WhatsApp-2023-10-28-a-las-16.02.08_9782b109-scaled.jpg?w=800&h=800&fit=crop"
+                            alt="Judo Competition">
                     </div>
                     <div class="gallery-item" data-index="2">
-                        <img src="https://www.panamsports.org/wp-content/uploads/2023/10/Lima-2019-Judo-Womens-78-kg-Gold-Medal-CUB-ORTIZ-Idalys-vs-PUR-MOJICA-Melissa-B23I7192.jpg?w=800&h=800&fit=crop" alt="Judo Technique">
+                        <img src="https://www.panamsports.org/wp-content/uploads/2023/10/Lima-2019-Judo-Womens-78-kg-Gold-Medal-CUB-ORTIZ-Idalys-vs-PUR-MOJICA-Melissa-B23I7192.jpg?w=800&h=800&fit=crop"
+                            alt="Judo Technique">
                     </div>
                     <div class="gallery-item" data-index="3">
-                        <img src="https://www.kingz.com/cdn/shop/articles/Judo_Throw_Technique_in_Action_8663fef1-9c70-4e0d-a05d-8d0dcb3a8e34.png?v=1764692694?w=800&h=800&fit=crop" alt="Martial Arts Training">
+                        <img src="https://www.kingz.com/cdn/shop/articles/Judo_Throw_Technique_in_Action_8663fef1-9c70-4e0d-a05d-8d0dcb3a8e34.png?v=1764692694?w=800&h=800&fit=crop"
+                            alt="Martial Arts Training">
                     </div>
                     <div class="gallery-item" data-index="4">
-                        <img src="https://la28.org/content/dam/latwentyeight/olympic-sports/desktop/OLYJudoDesktop.jpg?w=800&h=800&fit=crop" alt="Judo Practice">
+                        <img src="https://la28.org/content/dam/latwentyeight/olympic-sports/desktop/OLYJudoDesktop.jpg?w=800&h=800&fit=crop"
+                            alt="Judo Practice">
                     </div>
                     <div class="gallery-item" data-index="5">
-                        <img src="https://www.eju.net/wp-content/uploads/2022/05/_BT__D5B3100-scaled.jpg?w=800&h=800&fit=crop" alt="Judo Dojo">
+                        <img src="https://www.eju.net/wp-content/uploads/2022/05/_BT__D5B3100-scaled.jpg?w=800&h=800&fit=crop"
+                            alt="Judo Dojo">
                     </div>
                     <div class="gallery-item" data-index="6">
-                        <img src="https://www.paralympic.org/sites/default/files/styles/large_original/public/2021-06/Lucia-da-Silva-Teixeira-Araujo-Inna-Cherniak-judo-rio.jpg?itok=ns89YmXh?w=800&h=800&fit=crop" alt="Martial Arts">
+                        <img src="https://www.paralympic.org/sites/default/files/styles/large_original/public/2021-06/Lucia-da-Silva-Teixeira-Araujo-Inna-Cherniak-judo-rio.jpg?itok=ns89YmXh?w=800&h=800&fit=crop"
+                            alt="Martial Arts">
                     </div>
                     <div class="gallery-item" data-index="7">
-                        <img src="https://web-japan.org/kidsweb/img/virtual_judo01_pic01.jpg?w=800&h=800&fit=crop" alt="Combat Sports">
+                        <img src="https://web-japan.org/kidsweb/img/virtual_judo01_pic01.jpg?w=800&h=800&fit=crop"
+                            alt="Combat Sports">
                     </div>
                 </div>
             </div>
         </section>
-        
+
         <section class="content-section" id="sensei">
             <h2 class="section-title">Sensei</h2>
-            <p class="sensei-intro" id="senseiIntro">Build discipline, character, and respect through judo sport. Our services focus on nurturing these qualities in individuals of all ages.</p>
-            
+            <p class="sensei-intro" id="senseiIntro">Build discipline, character, and respect through judo sport. Our
+                services focus on nurturing these qualities in individuals of all ages.</p>
+
             <div class="sensei-grid">
                 <div class="sensei-card">
                     <figure>
-                        <img src="https://www.westcovinajudodojo.org/uploads/4/0/6/2/40629775/5020243_orig.jpg?w=600&h=800&fit=crop" alt="Sensei Tanaka" />
+                        <img src="https://www.westcovinajudodojo.org/uploads/4/0/6/2/40629775/5020243_orig.jpg?w=600&h=800&fit=crop"
+                            alt="Sensei Tanaka" />
                     </figure>
                     <div class="card-body">
                         <h2 class="card-title">Sensei Tanaka</h2>
-                        <p>6th Dan Black Belt with 25 years of experience in traditional Judo. Specializes in teaching kids and competitive techniques.</p>
+                        <p>6th Dan Black Belt with 25 years of experience in traditional Judo. Specializes in teaching
+                            kids and competitive techniques.</p>
                     </div>
                 </div>
-                
+
                 <div class="sensei-card">
                     <figure>
-                        <img src="https://images.squarespace-cdn.com/content/v1/5c9fbce8815512710c66479b/1555650572562-LV1D1IJHOZNSG6JJ7JJ6/Steve_Viera.jpg?w=600&h=800&fit=crop" alt="Sensei Rodriguez" />
+                        <img src="https://images.squarespace-cdn.com/content/v1/5c9fbce8815512710c66479b/1555650572562-LV1D1IJHOZNSG6JJ7JJ6/Steve_Viera.jpg?w=600&h=800&fit=crop"
+                            alt="Sensei Rodriguez" />
                     </figure>
                     <div class="card-body">
                         <h2 class="card-title">Sensei Rodriguez</h2>
-                        <p>5th Dan Black Belt and Olympic medalist. Focuses on advanced competition training and modern Judo techniques.</p>
+                        <p>5th Dan Black Belt and Olympic medalist. Focuses on advanced competition training and modern
+                            Judo techniques.</p>
                     </div>
                 </div>
-                
+
                 <div class="sensei-card">
                     <figure>
-                        <img src="https://www.londrinahistorica.com.br/admin/assets/uploads/images/publications/files/bbf548605fc33800e80e222292cdacb2.jpg?w=600&h=800&fit=crop" alt="Sensei Chen" />
+                        <img src="https://www.londrinahistorica.com.br/admin/assets/uploads/images/publications/files/bbf548605fc33800e80e222292cdacb2.jpg?w=600&h=800&fit=crop"
+                            alt="Sensei Chen" />
                     </figure>
                     <div class="card-body">
                         <h2 class="card-title">Sensei Chen</h2>
-                        <p>4th Dan Black Belt specializing in self-defense and practical applications. Expert in teaching beginners and building confidence.</p>
+                        <p>4th Dan Black Belt specializing in self-defense and practical applications. Expert in
+                            teaching beginners and building confidence.</p>
                     </div>
                 </div>
             </div>
         </section>
-        
+
         <section class="content-section" id="testimonials">
             <div class="testimonials-section">
                 <h2 class="section-title">Testimonials</h2>
-                
+
                 <div class="testimonial left">
                     <div class="testimonial-bubble">
-                        <p>Practicing judo with Iron Crane Judo for a few months has been incredible. Knowledgeable instructors, welcoming atmosphere, and noticeable improvements in discipline and character. Highly recommend</p>
+                        <p>Practicing judo with Iron Crane Judo for a few months has been incredible. Knowledgeable
+                            instructors, welcoming atmosphere, and noticeable improvements in discipline and character.
+                            Highly recommend</p>
                     </div>
                 </div>
-                
+
                 <div class="testimonial right">
                     <div class="testimonial-bubble">
-                        <p>Fantastic - Iron Crane Judo is the best place to learn judo, with experienced coaches who focus on physical aspects, discipline, and respect. Being part of this community has been invaluable</p>
+                        <p>Fantastic - Iron Crane Judo is the best place to learn judo, with experienced coaches who
+                            focus on physical aspects, discipline, and respect. Being part of this community has been
+                            invaluable</p>
                     </div>
                 </div>
-                
+
                 <div class="testimonial left">
                     <div class="testimonial-bubble">
-                        <p>Joining Iron Crane Judo has positively impacted my life. Challenging and rewarding training sessions, supportive instructors, and the development of discipline and respect have made it the best decision I've made</p>
+                        <p>Joining Iron Crane Judo has positively impacted my life. Challenging and rewarding training
+                            sessions, supportive instructors, and the development of discipline and respect have made it
+                            the best decision I've made</p>
                     </div>
                 </div>
             </div>
         </section>
-        
+
         <section class="content-section" id="info">
             <h2 class="section-title">Info</h2>
             <div class="info-cards-section">
                 <div class="info-cards-grid">
                     <div class="info-card">
                         <div class="info-card-image">
-                            <img src="https://www.paralympic.org/sites/default/files/styles/image_crop_16_9_800_450/public/2024-09/Yujiro%20Seto%2C%20Paris%202024%2C%20Para%20judo%2C%20Japan.jpg?h=4f0c95b9&itok=vBHB2uF-?w=800&h=600&fit=crop" alt="Judo Training">
+                            <img src="https://www.paralympic.org/sites/default/files/styles/image_crop_16_9_800_450/public/2024-09/Yujiro%20Seto%2C%20Paris%202024%2C%20Para%20judo%2C%20Japan.jpg?h=4f0c95b9&itok=vBHB2uF-?w=800&h=600&fit=crop"
+                                alt="Judo Training">
                         </div>
                         <div class="info-card-content">
-                            <h3 class="info-card-title" data-scramble="The Importance of Judo in Building Discipline, Character, and Respect">The Importance of Judo in Building Discipline, Character, and Respect</h3>
-                            <p class="info-card-text" data-scramble="Learn how practicing judo develops discipline, character, and respect, instilling life skills like perseverance, self-control, and humility. Discover how it promotes physical fitness and mental well-being, and explore its benefits beyond the sport">Learn how practicing judo develops discipline, character, and respect, instilling life skills like perseverance, self-control, and humility. Discover how it promotes physical fitness and mental well-being, and explore its benefits beyond the sport</p>
+                            <h3 class="info-card-title"
+                                data-scramble="The Importance of Judo in Building Discipline, Character, and Respect">
+                                The Importance of Judo in Building Discipline, Character, and Respect</h3>
+                            <p class="info-card-text"
+                                data-scramble="Learn how practicing judo develops discipline, character, and respect, instilling life skills like perseverance, self-control, and humility. Discover how it promotes physical fitness and mental well-being, and explore its benefits beyond the sport">
+                                Learn how practicing judo develops discipline, character, and respect, instilling life
+                                skills like perseverance, self-control, and humility. Discover how it promotes physical
+                                fitness and mental well-being, and explore its benefits beyond the sport</p>
                         </div>
                     </div>
-                    
+
                     <div class="info-card">
                         <div class="info-card-image">
-                            <img src="https://cdn.evolve-mma.com/wp-content/uploads/2023/04/judo.jpg?w=800&h=600&fit=crop" alt="Judo Practice">
+                            <img src="https://cdn.evolve-mma.com/wp-content/uploads/2023/04/judo.jpg?w=800&h=600&fit=crop"
+                                alt="Judo Practice">
                         </div>
                         <div class="info-card-content">
-                            <h3 class="info-card-title" data-scramble="The Benefits of Practicing Judo">The Benefits of Practicing Judo</h3>
-                            <p class="info-card-text" data-scramble="Discover how practicing judo can help build discipline, character, and respect. Learn about the positive impact it can have on personal development and overall well-being.">Discover how practicing judo can help build discipline, character, and respect. Learn about the positive impact it can have on personal development and overall well-being.</p>
+                            <h3 class="info-card-title" data-scramble="The Benefits of Practicing Judo">The Benefits of
+                                Practicing Judo</h3>
+                            <p class="info-card-text"
+                                data-scramble="Discover how practicing judo can help build discipline, character, and respect. Learn about the positive impact it can have on personal development and overall well-being.">
+                                Discover how practicing judo can help build discipline, character, and respect. Learn
+                                about the positive impact it can have on personal development and overall well-being.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        
+
         <section class="content-section" id="contact">
             <div class="contact-section">
                 <h2 class="section-title">Contact</h2>
@@ -1121,7 +1512,8 @@
                             <input type="text" class="input" name="name" placeholder="Your Name" required />
 
                             <label class="label">Email</label>
-                            <input type="email" class="input" name="email" placeholder="your.email@example.com" required />
+                            <input type="email" class="input" name="email" placeholder="your.email@example.com"
+                                required />
 
                             <label class="label">Message</label>
                             <textarea class="textarea" name="message" placeholder="Your message..." required></textarea>
@@ -1129,10 +1521,11 @@
                             <button type="submit" class="btn btn-primary">Send Message</button>
                         </form>
                     </fieldset>
-                    
+
                     <div class="hover-3d" id="contactImage">
                         <figure>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Jigoro_Kano_and_Kyuzo_Mifune_%28restoration%29.jpg?w=800&h=1000&fit=crop" alt="Judo Training" />
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Jigoro_Kano_and_Kyuzo_Mifune_%28restoration%29.jpg?w=800&h=1000&fit=crop"
+                                alt="Judo Training" />
                         </figure>
                         <div></div>
                         <div></div>
@@ -1151,30 +1544,36 @@
     <section class="instagram-section" id="follow">
         <h2 class="section-title">Follow</h2>
         <!-- <p class="instagram-handle"><a href="https://www.instagram.com/nyujudo/?hl=en" target="_blank" rel="noopener">@nyujudo</a></p> -->
-        
+
         <div class="instagram-scroll-container" id="instagramContainer">
             <div class="instagram-wrapper" id="instagramWrapper">
 
                 <div class="instagram-post">
-                    <iframe src="https://www.instagram.com/p/DIuUc0syp07/embed" width="400" height="500" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                    <iframe src="https://www.instagram.com/p/DIuUc0syp07/embed" width="400" height="500" frameborder="0"
+                        scrolling="no" allowtransparency="true"></iframe>
                 </div>
                 <div class="instagram-post">
-                    <iframe src="https://www.instagram.com/p/DGgbw4bS7tq/embed" width="400" height="500" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                    <iframe src="https://www.instagram.com/p/DGgbw4bS7tq/embed" width="400" height="500" frameborder="0"
+                        scrolling="no" allowtransparency="true"></iframe>
                 </div>
                 <!-- <div class="instagram-post">
                     <iframe src="https://www.instagram.com/p/DGE7Ul0MTjW/embed" width="400" height="500" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
                 </div> -->
                 <div class="instagram-post">
-                    <iframe src="https://www.instagram.com/p/C0pDC1ULsQ1/embed" width="400" height="500" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                    <iframe src="https://www.instagram.com/p/C0pDC1ULsQ1/embed" width="400" height="500" frameborder="0"
+                        scrolling="no" allowtransparency="true"></iframe>
                 </div>
                 <div class="instagram-post">
-                    <iframe src="https://www.instagram.com/p/CxK6d7YrlWM/embed" width="400" height="500" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                    <iframe src="https://www.instagram.com/p/CxK6d7YrlWM/embed" width="400" height="500" frameborder="0"
+                        scrolling="no" allowtransparency="true"></iframe>
                 </div>
                 <div class="instagram-post">
-                    <iframe src="https://www.instagram.com/p/CrT-yDmriil/embed" width="400" height="500" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                    <iframe src="https://www.instagram.com/p/CrT-yDmriil/embed" width="400" height="500" frameborder="0"
+                        scrolling="no" allowtransparency="true"></iframe>
                 </div>
                 <div class="instagram-post">
-                    <iframe src="https://www.instagram.com/p/DPRvRzdEZnA/embed" width="400" height="500" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                    <iframe src="https://www.instagram.com/p/DPRvRzdEZnA/embed" width="400" height="500" frameborder="0"
+                        scrolling="no" allowtransparency="true"></iframe>
                 </div>
             </div>
         </div>
@@ -1184,7 +1583,8 @@
 
     <div role="alert" class="alert alert-success" id="successAlert">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <span>Message sent successfully!</span>
     </div>
@@ -1226,9 +1626,9 @@
     <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
     <script>
         console.clear();
-        
+
         gsap.registerPlugin(TextPlugin, ScrambleTextPlugin, ScrollTrigger);
-        
+
         //Declarations
         let craneIcon = document.getElementById("craneIcon");
         let initialScreen = document.getElementById("initialScreen");
@@ -1243,7 +1643,7 @@
         let duration = 0.6;
         let pointsDelay = [];
         let allPoints = [];
-        
+
         let tl = gsap.timeline({
             onUpdate: render,
             defaults: {
@@ -1251,7 +1651,7 @@
                 duration: duration
             }
         });
-        
+
         for (let i = 0; i < numPaths; i++) {
             let points = [];
             allPoints.push(points);
@@ -1259,9 +1659,9 @@
                 points.push(0);
             }
         }
-        
+
         render();
-        
+
         // Click crane icon to trigger the morphing effect
         if (craneIcon) {
             craneIcon.addEventListener("click", onCraneClick);
@@ -1269,17 +1669,17 @@
         } else {
             console.error("Crane icon not found");
         }
-        
+
         function onCraneClick() {
             console.log("Crane clicked!");
             if (!tl.isActive()) {
                 animateOpen();
             }
         }
-        
+
         function animateOpen() {
             tl.progress(0).clear();
-            
+
             for (let i = 0; i < numPoints; i++) {
                 pointsDelay[i] = Math.random() * delayPointsMax;
             }
@@ -1287,7 +1687,7 @@
             for (let i = 0; i < numPaths; i++) {
                 let points = allPoints[i];
                 let pathDelay = delayPerPath * i;
-                
+
                 for (let j = 0; j < numPoints; j++) {
                     let delay = pointsDelay[j];
                     tl.to(points, {
@@ -1295,7 +1695,7 @@
                     }, delay + pathDelay);
                 }
             }
-            
+
             // After animation completes, hide initial screen and show content
             tl.call(() => {
                 window.scrollTo(0, 0);
@@ -1317,7 +1717,7 @@
                             speed: 0.3
                         }
                     });
-                    
+
                     gsap.to("#subtitle", {
                         duration: 1.5,
                         delay: 0.3,
@@ -1328,7 +1728,7 @@
                             speed: 0.3
                         }
                     });
-                    
+
                     gsap.to("#senseiIntro", {
                         duration: 1.5,
                         delay: 0.6,
@@ -1340,14 +1740,14 @@
                         }
                     });
                 }, 200);
-                
+
                 // Then animate back to reveal content
                 setTimeout(() => {
                     animateReveal();
                 }, 100);
             });
         }
-        
+
         function animateReveal() {
             tl.progress(0).clear();
             for (let i = 0; i < numPoints; i++) {
@@ -1356,7 +1756,7 @@
             for (let i = 0; i < numPaths; i++) {
                 let points = allPoints[i];
                 let pathDelay = delayPerPath * (numPaths - i - 1);
-                
+
                 for (let j = 0; j < numPoints; j++) {
                     let delay = pointsDelay[j];
                     tl.to(points, {
@@ -1365,66 +1765,66 @@
                 }
             }
         }
-        
+
         function render() {
             for (let i = 0; i < numPaths; i++) {
                 let path = paths[i];
                 let points = allPoints[i];
                 let d = "";
-                
+
                 d += `M 0 ${points[0]} C`;
-                
+
                 for (let j = 0; j < numPoints - 1; j++) {
                     let p = (j + 1) / (numPoints - 1) * 100;
                     let cp = p - (1 / (numPoints - 1) * 100) / 2;
-                    d += ` ${cp} ${points[j]} ${cp} ${points[j+1]} ${p} ${points[j+1]}`;
+                    d += ` ${cp} ${points[j]} ${cp} ${points[j + 1]} ${p} ${points[j + 1]}`;
                 }
-                
+
                 d += ` V 0 H 0`;
                 path.setAttribute("d", d);
             }
         }
-        
+
         // 3D Card Effect
         const card3d = document.getElementById('card3d');
         const figure = card3d.querySelector('figure');
         let isHovering = false;
-        
+
         card3d.addEventListener('mouseenter', (e) => {
             if (e.target === card3d || card3d.contains(e.target)) {
                 isHovering = true;
             }
         });
-        
+
         card3d.addEventListener('mousemove', (e) => {
             if (!isHovering) return;
-            
+
             e.stopPropagation();
-            
+
             const rect = card3d.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
+
             if (x < 0 || x > rect.width || y < 0 || y > rect.height) {
                 return;
             }
-            
+
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            
+
             const rotateX = (y - centerY) / 10;
             const rotateY = (centerX - x) / 10;
-            
+
             figure.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
         });
-        
+
         card3d.addEventListener('mouseleave', (e) => {
             if (!card3d.contains(e.relatedTarget)) {
                 isHovering = false;
                 figure.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
             }
         });
-        
+
         // Footer scroll, only appears at bottom of page
         gsap.to("#footer", {
             scrollTrigger: {
@@ -1436,17 +1836,17 @@
             y: 0,
             ease: "none"
         });
-        
+
         // Tab Navigation, smooth Scroll to Sections
         const navTabs = document.querySelectorAll('.tab');
-        
+
         navTabs.forEach(tab => {
             tab.addEventListener('click', (e) => {
                 e.preventDefault();
                 const sectionName = tab.getAttribute('data-section');
                 navTabs.forEach(t => t.classList.remove('tab-active'));
                 tab.classList.add('tab-active');
-                
+
                 // For About tab, scroll to the top
                 if (sectionName === 'about') {
                     const headerHeight = mainHeader.offsetHeight;
@@ -1466,13 +1866,13 @@
                 }
             });
         });
-        
+
         // Gallery
         const galleryItems = document.querySelectorAll('.gallery-item');
         const galleryModal = document.getElementById('galleryModal');
         const modalImage = document.getElementById('modalImage');
         const modalClose = document.getElementById('modalClose');
-        
+
         galleryItems.forEach(item => {
             item.addEventListener('click', () => {
                 const img = item.querySelector('img');
@@ -1486,7 +1886,7 @@
                 });
             });
         });
-        
+
         function closeModal() {
             gsap.to(galleryModal, {
                 opacity: 0,
@@ -1496,21 +1896,21 @@
                 }
             });
         }
-        
+
         modalClose.addEventListener('click', closeModal);
         galleryModal.addEventListener('click', (e) => {
             if (e.target === galleryModal) {
                 closeModal();
             }
         });
-        
+
         // Info Cards scramble animation on scroll
         const infoCardTitles = document.querySelectorAll('.info-card-title');
         const infoCardTexts = document.querySelectorAll('.info-card-text');
-        
+
         infoCardTitles.forEach((title, index) => {
             const originalText = title.getAttribute('data-scramble');
-            
+
             gsap.to(title, {
                 scrollTrigger: {
                     trigger: title,
@@ -1526,10 +1926,10 @@
                 }
             });
         });
-        
+
         infoCardTexts.forEach((text, index) => {
             const originalText = text.getAttribute('data-scramble');
-            
+
             gsap.to(text, {
                 scrollTrigger: {
                     trigger: text,
@@ -1546,21 +1946,21 @@
                 }
             });
         });
-        
+
         // Contact Form Submission
         const contactForm = document.getElementById('contactForm');
         const successAlert = document.getElementById('successAlert');
-        
+
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const formData = new FormData(contactForm);
             const data = {
                 name: formData.get('name'),
                 email: formData.get('email'),
                 message: formData.get('message')
             };
-            
+
             //DOES NOT WORK RIGHT NOW BUT HOW TO IS BELOW
             // Replace with your actual email service endpoint
             // For now, simulating submission
@@ -1571,7 +1971,7 @@
                 //     headers: { 'Content-Type': 'application/json' },
                 //     body: JSON.stringify(data)
                 // });
-                
+
                 // Simulated success for demo
                 setTimeout(() => {
                     contactForm.reset();
@@ -1584,41 +1984,41 @@
                 console.error('Error sending message:', error);
             }
         });
-        
+
         // 3D Effect for Contact Image
         const contactImage = document.getElementById('contactImage');
         if (contactImage) {
             const contactFigure = contactImage.querySelector('figure');
             let contactHovering = false;
-            
+
             contactImage.addEventListener('mouseenter', (e) => {
                 if (e.target === contactImage || contactImage.contains(e.target)) {
                     contactHovering = true;
                 }
             });
-            
+
             contactImage.addEventListener('mousemove', (e) => {
                 if (!contactHovering) return;
-                
+
                 e.stopPropagation();
-                
+
                 const rect = contactImage.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
+
                 if (x < 0 || x > rect.width || y < 0 || y > rect.height) {
                     return;
                 }
-                
+
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                
+
                 const rotateX = (y - centerY) / 10;
                 const rotateY = (centerX - x) / 10;
-                
+
                 contactFigure.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
             });
-            
+
             contactImage.addEventListener('mouseleave', (e) => {
                 if (!contactImage.contains(e.relatedTarget)) {
                     contactHovering = false;
@@ -1626,32 +2026,32 @@
                 }
             });
         }
-        
+
         // Instagram Feed 
         const instagramWrapper = document.getElementById('instagramWrapper');
         const instagramContainer = document.getElementById('instagramContainer');
-        
+
         console.log('Instagram wrapper:', instagramWrapper);
         console.log('Instagram container:', instagramContainer);
-        
+
         if (instagramWrapper && instagramContainer) {
             setTimeout(() => {
                 console.log('Starting Instagram animation setup');
-                
+
                 // Cloning posts, posts are not exactly how they are on instagram
                 const posts = Array.from(instagramWrapper.children);
                 console.log('Number of posts:', posts.length);
-                
+
                 posts.forEach(post => {
                     const clone = post.cloneNode(true);
                     instagramWrapper.appendChild(clone);
                 });
-                
+
                 console.log('Posts cloned, total now:', instagramWrapper.children.length);
-                
+
                 const totalWidth = instagramWrapper.scrollWidth / 2;
                 console.log('Total width for animation:', totalWidth);
-                
+
                 // Continuous rotation
                 const rotateAnimation = gsap.to(instagramWrapper, {
                     x: -totalWidth,
@@ -1662,15 +2062,15 @@
                         x: gsap.utils.unitize(x => parseFloat(x) % totalWidth)
                     }
                 });
-                
+
                 console.log('Animation started');
-                
+
                 // Pause on hover
                 instagramContainer.addEventListener('mouseenter', () => {
                     console.log('Animation paused');
                     rotateAnimation.pause();
                 });
-                
+
                 // Resume when not hovering
                 instagramContainer.addEventListener('mouseleave', () => {
                     console.log('Animation resumed');
@@ -1680,4 +2080,5 @@
         }
     </script>
 </body>
+
 </html>
